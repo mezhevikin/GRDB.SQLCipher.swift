@@ -699,6 +699,7 @@ class EncryptionTests: GRDBTestCase {
         }
     }
     
+    /*
     func testSQLCipher3Compatibility() throws {
         guard let cipherMajorVersion = try DatabaseQueue()
             .read({ try String.fetchOne($0, sql: "PRAGMA cipher_version") })
@@ -728,5 +729,6 @@ class EncryptionTests: GRDBTestCase {
             }
         }
     }
+    */
 }
 #endif

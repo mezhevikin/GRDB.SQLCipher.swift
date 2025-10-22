@@ -1,12 +1,5 @@
-// Import C SQLite functions
-#if SWIFT_PACKAGE
 import GRDBSQLite
-#elseif GRDBCIPHER
 import SQLCipher
-#elseif !GRDBCUSTOMSQLITE && !GRDBCIPHER
-import SQLite3
-#endif
-
 import Foundation
 
 /// A format that prints one line per database value. All blob values

@@ -6,9 +6,15 @@ import PackageDescription
 
 var swiftSettings: [SwiftSetting] = [
     .define("SQLITE_ENABLE_FTS5"),
+    .define("GRDBCIPHER"),
+    .define("SQLITE_HAS_CODEC")
 ]
-var cSettings: [CSetting] = []
-var dependencies: [PackageDescription.Package.Dependency] = []
+var cSettings: [CSetting] = [
+    .define("SQLITE_HAS_CODEC")
+]
+var dependencies: [PackageDescription.Package.Dependency] = [
+    .package(url: "https://github.com/sqlcipher/SQLCipher.swift.git", from: "4.11.0")
+]
 
 // Don't rely on those environment variables. They are ONLY testing conveniences:
 // $ SQLITE_ENABLE_PREUPDATE_HOOK=1 make test_SPM
@@ -48,7 +54,7 @@ let package = Package(
             providers: [.apt(["libsqlite3-dev"])]),
         .target(
             name: "GRDB",
-            dependencies: ["GRDBSQLite"],
+            dependencies: ["GRDBSQLite", .product(name: "SQLCipher", package: "SQLCipher.swift")],
             path: "GRDB",
             resources: [.copy("PrivacyInfo.xcprivacy")],
             cSettings: cSettings,
